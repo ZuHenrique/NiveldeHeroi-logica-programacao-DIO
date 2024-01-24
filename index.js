@@ -5,31 +5,31 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+// Mapeamento dos níveis
+const niveis = [
+  { nome: 'Ferro', limite: 1000 },
+  { nome: 'Bronze', limite: 2000 },
+  { nome: 'Prata', limite: 5000 },
+  { nome: 'Ouro', limite: 7000 },
+  { nome: 'Platina', limite: 8000 },
+  { nome: 'Ascendente', limite: 9000 },
+  { nome: 'Imortal', limite: 10000 },
+  { nome: 'Radiante', limite: Infinity }
+];
+
+// Função para determinar o nível do herói
+function determinarNivel(xp) {
+  const { nome } = niveis.find(({ limite }) => xp <= limite);
+  return nome;
+}
+
 // Captura o nome e a quantidade de experiência do herói
 rl.question('Digite o nome do herói: ', (nomeHeroi) => {
   rl.question('Digite a quantidade de experiência do herói: ', (xpHeroi) => {
     xpHeroi = parseInt(xpHeroi);
 
-    // Utiliza uma estrutura de decisão para determinar o nível do herói
-    let nivel;
-
-    if (xpHeroi < 1000) {
-        nivel = "Ferro";
-    } else if (xpHeroi >= 1001 && xpHeroi <= 2000) {
-        nivel = "Bronze";
-    } else if (xpHeroi >= 2001 && xpHeroi <= 5000) {
-        nivel = "Prata";
-    } else if (xpHeroi >= 5001 && xpHeroi <= 7000) {
-        nivel = "Ouro";
-    } else if (xpHeroi >= 7001 && xpHeroi <= 8000) {
-        nivel = "Platina";
-    } else if (xpHeroi >= 8001 && xpHeroi <= 9000) {
-        nivel = "Ascendente";
-    } else if (xpHeroi >= 9001 && xpHeroi <= 10000) {
-        nivel = "Imortal";
-    } else {
-        nivel = "Radiante";
-    }
+    // Determina o nível do herói
+    const nivel = determinarNivel(xpHeroi);
 
     // Exibe a mensagem com o nome e o nível do herói
     console.log(`O Herói de nome ${nomeHeroi} está no nível de ${nivel}`);
